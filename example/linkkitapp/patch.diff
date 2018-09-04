@@ -1,0 +1,72 @@
+diff --git a/example/linkkitapp/linkkitapp.mk b/example/linkkitapp/linkkitapp.mk
+index f6a75330..2477a794 100755
+--- a/example/linkkitapp/linkkitapp.mk
++++ b/example/linkkitapp/linkkitapp.mk
+@@ -16,5 +16,7 @@ ifneq ($(HOST_MCU_FAMILY),esp8266)
+ $(NAME)_COMPONENTS  += cli
+ GLOBAL_DEFINES += CONFIG_AOS_CLI
+ else
++$(NAME)_COMPONENTS  += cli
++GLOBAL_DEFINES += CONFIG_AOS_CLI CONFIG_YWSS
+ GLOBAL_DEFINES +=FOTA_RAM_LIMIT_MODE AWSS_NEED_REBOOT
+ endif
+\ No newline at end of file
+diff --git a/framework/protocol/linkkit/iotkit/sdk-encap/imports/iot_import_product.h b/framework/protocol/linkkit/iotkit/sdk-encap/imports/iot_import_product.h
+index db594169..2b2b2a22 100755
+--- a/framework/protocol/linkkit/iotkit/sdk-encap/imports/iot_import_product.h
++++ b/framework/protocol/linkkit/iotkit/sdk-encap/imports/iot_import_product.h
+@@ -39,20 +39,20 @@
+ #define DEVICE_NAME             "test_light_02"
+ #define DEVICE_SECRET           "rOip6mfWD3sxO6pO9maUBTEJ1AjmK8xe"
+ #elif ESP8266
+-#define PRODUCT_KEY             "a1AzoSi5TMc"
+-#define PRODUCT_SECRET          "Z9Ze6qgMrWgTOezW"
+-#define DEVICE_NAME             "ESP8266_cxf01"
+-#define DEVICE_SECRET           "K2pM9rSaQecgx8Vo31yjM6vmsXuQA8r9"
++#define PRODUCT_KEY             "a1iXMxO0a6i"
++#define PRODUCT_SECRET          "NbY39pmJgP4WJFJQ"
++#define DEVICE_NAME             "lights"
++#define DEVICE_SECRET           "oIu7bmuGH5abKgK14bf3Rr827"
+ #elif  MQTT_TEST
+ #define PRODUCT_KEY             "yfTuLfBJTiL"
+ #define DEVICE_NAME             "TestDeviceForDemo"
+ #define DEVICE_SECRET           "fSCl9Ns5YPnYN8Ocg0VEel1kXFnRlV6c"
+ #define PRODUCT_SECRET          ""
+ #else
+-#define PRODUCT_KEY             "a1AzoSi5TMc"
+-#define PRODUCT_SECRET          "Z9Ze6qgMrWgTOezW"
+-#define DEVICE_NAME             "test_light_03"
+-#define DEVICE_SECRET           "oIdAOeech8fM7aHtq0QSvV1oSle30SxP"
++#define PRODUCT_KEY             "a1iXMxO0a6i"
++#define PRODUCT_SECRET          "NbY39pmJgP4WJFJQ"
++#define DEVICE_NAME             "lights"
++#define DEVICE_SECRET           "oIu7bmuGH5abKgK14bf3Rr827"
+ #endif
+ #endif
+ 
+diff --git a/platform/mcu/esp8266/bsp/entry.c b/platform/mcu/esp8266/bsp/entry.c
+index 17702f6c..95359853 100644
+--- a/platform/mcu/esp8266/bsp/entry.c
++++ b/platform/mcu/esp8266/bsp/entry.c
+@@ -42,7 +42,7 @@ extern int _text_start;
+ static kinit_t kinit = {
+     .argc = 0,
+     .argv = NULL,
+-    .cli_enable = 0
++    .cli_enable = 1
+ };
+ 
+ static void app_entry(void *arg)
+diff --git a/site_scons/scons_upload.py b/site_scons/scons_upload.py
+index d5d619a4..426ca24b 100755
+--- a/site_scons/scons_upload.py
++++ b/site_scons/scons_upload.py
+@@ -101,7 +101,7 @@ def upload_esp8266(target, aos_path):
+         error('Unsupported Operating System!')
+     cmd = 'esptool.py'
+     port = miniterm.ask_for_port()
+-    image_path = os.path.join(os.getcwd(), 'out', target, 'binary', target + '-0x1000.bin').replace('\\', '/')
++    image_path = os.path.join(os.getcwd(), 'out', target, 'binary', target + '.bin').replace('\\', '/')
+     boot_bin_path = os.path.join(aos_path, 'platform/mcu/esp8266/bsp/boot_v1.7_921600.bin').replace('\\', '/')
+     init_bin_path = os.path.join(aos_path, 'platform/mcu/esp8266/bsp/esp_init_data_default.bin').replace('\\', '/')
+     blank_bin_path = os.path.join(aos_path, 'platform/mcu/esp8266/bsp/blank.bin').replace('\\', '/')
