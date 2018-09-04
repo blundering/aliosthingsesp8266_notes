@@ -11,6 +11,7 @@
     #define DEVICE_SECRET           "ds"
     ```
   ![设置四元组](../../resource/img/set_meta_data.jpg)
+
 2. 开启8266的cli命令模式
   `$AliOS-Things/platform/mcu/esp8266/bsp/entry.c`
   ![开启cli](../../resource/img/cli_enable.jpg)
