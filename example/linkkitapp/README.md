@@ -1,3 +1,5 @@
+以下修改使用[AliOS-Things](https://github.com/alibaba/AliOS-Things)master分支Commit:e8cb9ec7db73dc37036e06b758bc003d74106eef 
+
 #### 配网
 1. 修改三元组为你在阿里平台申请的设备相关信息.
    我是从[https://living.aliyun.com/](https://living.aliyun.com/)登录的.
