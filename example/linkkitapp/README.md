@@ -24,7 +24,7 @@
 
 - 烧写完成重启设备.
 - 串口输入cli命令 active_awss调起配网.
-- 手机扫描[二维码](resource/doc/Linkkit公版app使用指南.pdf)进行配网.
+- 手机扫描[二维码](../../resource/doc/Linkkit公版app使用指南.pdf)进行配网.
 
   **[所有修改代码](patch.diff) 自己对比git** 结果如下:
 
