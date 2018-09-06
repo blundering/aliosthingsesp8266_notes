@@ -6,7 +6,7 @@ alios-things-esp8266浅显笔记,自己玩的.
 #### 目录
 
 1. [linkkitapp示例](example/linkkitapp/)
-2. ESP8266 GPIO控制
+2. [ESP8266 GPIO控制](hal/gpio/)
 3. ...
 
 #### 安装教程
